@@ -1,0 +1,10 @@
+sudo apt-get install libjpeg8-dev
+git clone git://github.com/capnm/go_rpi.git
+
+# clock example
+cd go_rpi
+export GOPATH=$(pwd)
+
+go install -v clock
+bin/clock
+ctrl+c
