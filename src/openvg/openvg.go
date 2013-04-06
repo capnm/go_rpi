@@ -3,7 +3,7 @@
 //	2012 Original Author Anthony Starks <https://github.com/ajstarks/openvg>
 //		https://raw.github.com/ajstarks/openvg/master/LICENSE
 //
-//	2013 Martin Capitanio <https://github.com/capnm/go_rpi/src/openvg>
+//	2013 Martin Capitanio <https://github.com/capnm/go_rpi/tree/master/src/openvg>
 //
 package openvg
 
@@ -195,6 +195,8 @@ var colornames = map[string]RGB{
 
 // Init initializes the graphics subsystem
 func Init() (int, int) {
+	// Calling VG/OpenGL from diferent thread gives a VG_NO_CONTEXT_ERROR,
+	// so lock the calling goroutine to a sigle thread.
 	runtime.LockOSThread()
 	var rh, rw C.int
 	C.init(&rw, &rh)

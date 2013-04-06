@@ -1,4 +1,4 @@
-// A clock with some hardware data.
+// A fullscreen clock with some hardware data.
 package main
 
 import (

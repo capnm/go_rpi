@@ -1,4 +1,4 @@
-// Draw an OpenVG circle on the RPi famebuffer.
+// Draw a blue marble on the RPi screen.
 package main
 
 import (
@@ -17,12 +17,12 @@ func main() {
 	openvg.Start(width, height)
 	openvg.BackgroundColor("black")
 
-	// draw a blue 1/2 circle
+	// Draw a blue 1/2 circle.
 	openvg.FillRGB(44, 100, 232, 1)
 	openvg.Circle(w2, 0, w)
 	openvg.End()
 
-	// wait for the return key
+	// Wait for the return key.
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 
 	openvg.Finish()
