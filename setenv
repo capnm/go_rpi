@@ -32,8 +32,8 @@ echo "PATH=$PATH"
 #is GOGC=100. Setting GOGC=off disables the garbage collector entirely.
 #The runtime/debug package's SetGCPercent function allows changing this
 #percentage at run time. See http://golang.org/pkg/runtime/debug/#SetGCPercent.
-GOGC=off
-#
+#GOGC=off
+
 #The GOGCTRACE variable controls debug output from the garbage collector.
 #Setting GOGCTRACE=1 causes the garbage collector to emit a single line to standard
 #error at each collection, summarizing the amount of memory collected and the
