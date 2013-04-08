@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#set -e
+#set -x
+
+unset GOBIN GOROOT GOARCH GOARM GOMAXPROCS
+# get the bash script directory
+d="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+#export GOPATH="$d:/opt/go-lib"
+export GOPATH="$d"
+echo "GOPATH=$GOPATH"
+
+#GOBIN=$d/bin-$(go env GOARCH)
+#echo "GOBIN=$GOBIN"
+#export GOBIN
+
+export PATH="$d/bin:$PATH"
+echo "PATH=$PATH"
+
+#export TMPDIR="$d/tmp"
+#export TMPDIR="/tmp"
+#echo "TMPDIR=$TMPDIR"
+
+#export GOMAXPROCS=2
+#echo "GOMAXPROCS=$GOMAXPROCS"
+
+# Unset means hiding runtime routines
+# GOTRACEBACK=0 means do not show any stack traces
+# GOTRACEBACK=2 mean include the runtime routines
+export GOTRACEBACK=2
+echo "GOTRACEBACK=$GOTRACEBACK"
