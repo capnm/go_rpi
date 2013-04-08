@@ -22,11 +22,42 @@ echo "PATH=$PATH"
 #export TMPDIR="/tmp"
 #echo "TMPDIR=$TMPDIR"
 
+#The following environment variables ($name or %name%, depending on the host
+#operating system) control the run-time behavior of Go programs. The meanings
+#and use may change from release to release.
+#
+#The GOGC variable sets the initial garbage collection target percentage.
+#A collection is triggered when the ratio of freshly allocated data to live data
+#remaining after the previous collection reaches this percentage. The default
+#is GOGC=100. Setting GOGC=off disables the garbage collector entirely.
+#The runtime/debug package's SetGCPercent function allows changing this
+#percentage at run time. See http://golang.org/pkg/runtime/debug/#SetGCPercent.
+GOGC=off
+#
+#The GOGCTRACE variable controls debug output from the garbage collector.
+#Setting GOGCTRACE=1 causes the garbage collector to emit a single line to standard
+#error at each collection, summarizing the amount of memory collected and the
+#length of the pause. Setting GOGCTRACE=2 emits the same summary but also
+#repeats each collection.
+#
+#The GOMAXPROCS variable limits the number of operating system threads that
+#can execute user-level Go code simultaneously. There is no limit to the number of threads
+#that can be blocked in system calls on behalf of Go code; those do not count against
+#the GOMAXPROCS limit. This package's GOMAXPROCS function queries and changes
+#the limit.
 #export GOMAXPROCS=2
 #echo "GOMAXPROCS=$GOMAXPROCS"
 
-# Unset means hiding runtime routines
-# GOTRACEBACK=0 means do not show any stack traces
-# GOTRACEBACK=2 mean include the runtime routines
-export GOTRACEBACK=2
+#The GOTRACEBACK variable controls the amount of output generated when a Go
+#program fails due to an unrecovered panic or an unexpected runtime condition.
+#By default, a failure prints a stack trace for every extant goroutine, eliding functions
+#internal to the run-time system, and then exits with exit code 2.
+#If GOTRACEBACK=0, the per-goroutine stack traces are omitted entirely.
+#If GOTRACEBACK=1, the default behavior is used.
+#If GOTRACEBACK=2, the per-goroutine stack traces include run-time functions.
+#If GOTRACEBACK=crash, the per-goroutine stack traces include run-time functions,
+#and if possible the program crashes in an operating-specific manner instead of
+#exiting. For example, on Unix systems, the program raises SIGABRT to trigger a
+#core dump.
+export GOTRACEBACK=crash
 echo "GOTRACEBACK=$GOTRACEBACK"
