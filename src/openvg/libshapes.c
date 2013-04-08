@@ -384,10 +384,11 @@ void FillRadialGradient(VGfloat cx, VGfloat cy, VGfloat fx, VGfloat fy, VGfloat 
 
 // Text renders a string of text at a specified location, size, using the specified font glyphs
 // derived from http://web.archive.org/web/20070808195131/http://developer.hybrid.fi/font2openvg/renderFont.cpp.txt
-void Text(VGfloat x, VGfloat y, char *s, Fontinfo f, int pointsize) {
+void Text(VGfloat x, VGfloat y, char *s, int pointsize) {
 	VGfloat size = (VGfloat) pointsize, xx = x, mm[9];
 	int i;
-
+	//XXX
+	Fontinfo f = SerifTypeface;
 	vgGetMatrix(mm);
 	for (i = 0; i < (int)strlen(s); i++) {
 		unsigned int character = (unsigned int)s[i];
@@ -409,8 +410,9 @@ void Text(VGfloat x, VGfloat y, char *s, Fontinfo f, int pointsize) {
 }
 
 // TextWidth returns the width of a text string at the specified font and size.
-VGfloat TextWidth(char *s, Fontinfo f, int pointsize) {
+VGfloat TextWidth(char *s, int pointsize) {
 	int i;
+	Fontinfo f = SerifTypeface;
 	VGfloat tw = 0.0;
 	VGfloat size = (VGfloat) pointsize;
 	for (i = 0; i < (int)strlen(s); i++) {
@@ -425,15 +427,17 @@ VGfloat TextWidth(char *s, Fontinfo f, int pointsize) {
 }
 
 // TextMid draws text, centered on (x,y)
-void TextMid(VGfloat x, VGfloat y, char *s, Fontinfo f, int pointsize) {
-	VGfloat tw = TextWidth(s, f, pointsize);
-	Text(x - (tw / 2.0), y, s, f, pointsize);
+void TextMid(VGfloat x, VGfloat y, char *s, int pointsize) {
+	Fontinfo f = SerifTypeface;
+	VGfloat tw = TextWidth(s, pointsize);
+	Text(x - (tw / 2.0), y, s, pointsize);
 }
 
 // TextEnd draws text, with its end aligned to (x,y)
-void TextEnd(VGfloat x, VGfloat y, char *s, Fontinfo f, int pointsize) {
-	VGfloat tw = TextWidth(s, f, pointsize);
-	Text(x - tw, y, s, f, pointsize);
+void TextEnd(VGfloat x, VGfloat y, char *s, int pointsize) {
+	Fontinfo f = SerifTypeface;
+	VGfloat tw = TextWidth(s, pointsize);
+	Text(x - tw, y, s, pointsize);
 }
 
 //

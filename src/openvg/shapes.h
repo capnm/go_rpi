@@ -2,10 +2,12 @@ extern void Translate(VGfloat, VGfloat);
 extern void Rotate(VGfloat);
 extern void Shear(VGfloat, VGfloat);
 extern void Scale(VGfloat, VGfloat);
-extern void Text(VGfloat, VGfloat, char *, Fontinfo, int);
-extern void TextMid(VGfloat, VGfloat, char *, Fontinfo, int);
-extern void TextEnd(VGfloat, VGfloat, char *, Fontinfo, int);
-extern VGfloat TextWidth(char *, Fontinfo, int);
+//XXX
+extern void Text(VGfloat, VGfloat, char *, int);
+extern void TextMid(VGfloat, VGfloat, char *, int);
+extern void TextEnd(VGfloat, VGfloat, char *, int);
+extern VGfloat TextWidth(char *, int);
+//XXX
 extern void Cbezier(VGfloat, VGfloat, VGfloat, VGfloat, VGfloat, VGfloat, VGfloat, VGfloat);
 extern void Qbezier(VGfloat, VGfloat, VGfloat, VGfloat, VGfloat, VGfloat);
 extern void Polygon(VGfloat *, VGfloat *, VGint);
