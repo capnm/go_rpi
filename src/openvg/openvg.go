@@ -472,7 +472,6 @@ func Polyline(x, y []float64, style ...string) {
 	}
 }
 
-/* TODO remove if resolved https://code.google.com/p/go/issues/detail?id=5227
 // selectfont specifies the font by generic name
 func selectfont(s string) C.Fontinfo {
 	switch s {
@@ -485,25 +484,25 @@ func selectfont(s string) C.Fontinfo {
 	}
 	return C.SerifTypeface
 }
-*/
+
 // Text draws text whose aligment begins (x,y)
 func Text(x, y float64, s string, font string, size int, style ...string) {
 	t := C.CString(s)
-	C.Text(C.VGfloat(x), C.VGfloat(y), t, C.int(size))
+	C.Text(C.VGfloat(x), C.VGfloat(y), t, selectfont(font), C.int(size))
 	C.free(unsafe.Pointer(t))
 }
 
 // TextMid draws text centered at (x,y)
 func TextMid(x, y float64, s string, font string, size int, style ...string) {
 	t := C.CString(s)
-	C.TextMid(C.VGfloat(x), C.VGfloat(y), t, C.int(size))
+	C.TextMid(C.VGfloat(x), C.VGfloat(y), t, selectfont(font), C.int(size))
 	C.free(unsafe.Pointer(t))
 }
 
 // TextEnd draws text end-aligned at (x,y)
 func TextEnd(x, y float64, s string, font string, size int, style ...string) {
 	t := C.CString(s)
-	C.TextEnd(C.VGfloat(x), C.VGfloat(y), t, C.int(size))
+	C.TextEnd(C.VGfloat(x), C.VGfloat(y), t, selectfont(font), C.int(size))
 	C.free(unsafe.Pointer(t))
 }
 
@@ -511,7 +510,7 @@ func TextEnd(x, y float64, s string, font string, size int, style ...string) {
 func TextWidth(s string, font string, size int) float64 {
 	t := C.CString(s)
 	defer C.free(unsafe.Pointer(t))
-	return float64(C.TextWidth(t, C.int(size)))
+	return float64(C.TextWidth(t, selectfont(font), C.int(size)))
 }
 
 // Translate translates the coordinate system to (x,y)
