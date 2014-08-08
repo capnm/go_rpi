@@ -13,11 +13,11 @@ export GOPATH=$(pwd)
 ```
 
 # Examples
-### To check if everything works, run the simple blue circle program.
+### To check if everything works, run the blue circle program:
 Run `bin/circle` in the linux console (ctrl+alt+F1) or the (ssh) terminal.
 You can rebuild the binary with `go install -v circle`.
 
-### OpenVG: A simple clock displaying some hardware data.
+### A simple clock displaying hardware data:
 Run `bin/clock`.
 Rebuild it with `go install -v clock`
 
