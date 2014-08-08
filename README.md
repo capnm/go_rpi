@@ -43,4 +43,4 @@ reboot
 ```
 
 # Credits 
-* The Go OpenVG parts have been extracted from the [ajstarks openvg](https://github.com/ajstarks/openvg) repo.
+* The original OpenVG code was copied from the [ajstarks openvg](https://github.com/ajstarks/openvg) repository.
