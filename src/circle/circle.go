@@ -11,8 +11,8 @@ import (
 func main() {
 	width, height := openvg.Init()
 
-	w2 := float64(width / 2)
-	w := float64(width)
+	w2 := float32(width / 2)
+	w := float32(width)
 
 	openvg.Start(width, height)
 	openvg.BackgroundColor("black")

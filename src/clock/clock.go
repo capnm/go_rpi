@@ -14,9 +14,9 @@ func main() {
 	width, height := openvg.Init()
 	dim := fmt.Sprintf("w=%d h=%d", width, height)
 
-	w2 := float64(width / 2)
-	h2 := float64(height / 2)
-	w := float64(width)
+	w2 := float32(width / 2)
+	h2 := float32(height / 2)
+	w := float32(width)
 
 	for {
 		openvg.Start(width, height)
