@@ -13,7 +13,7 @@ export GOPATH=$(pwd)
 ```
 
 # Examples
-### OpenVG: For a test if everything works, just draw a blue circle on the screen.
+### To check if everything works, run the simple blue circle program.
 Run `bin/circle` in the linux console (ctrl+alt+F1) or the (ssh) terminal.
 You can rebuild the binary with `go install -v circle`.
 
@@ -26,13 +26,14 @@ Rebuild it with `go install -v clock`
 
 # Gotchas
 error: failed to add service - already in use?
+
 	edit /boot/config.txt; make sure that the minimum video ram size (gpu_mem) is 64mb
 
 # Install the Go language, release 1.3 (~280MB).
 ```
 git clone -b release-branch.go1.3 git://github.com/capnm/golang.git --depth 1
 sudo mv golang /opt/
-cd opt/golang/src
+cd /opt/golang/src
 ./make.bash 
 
 echo 'export PATH=/opt/golang/bin:$PATH' >> /etc/bash.bashrc
