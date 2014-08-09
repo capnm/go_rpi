@@ -36,6 +36,7 @@ sudo mv golang /opt/
 cd /opt/golang/src
 ./make.bash 
 
+sudo -i
 echo 'export PATH=/opt/golang/bin:$PATH' >> /etc/bash.bashrc
 
 reboot
