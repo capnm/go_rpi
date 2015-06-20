@@ -60,4 +60,4 @@ You get `error: failed to add service - already in use?` or an another weird `EG
 
 
 # Credits 
-* The original OpenVG code was copied from the [ajstarks openvg](https://github.com/ajstarks/openvg) repository.
+* The OpenVG library was vendored from the [ajstarks openvg](https://github.com/ajstarks/openvg) repository.
