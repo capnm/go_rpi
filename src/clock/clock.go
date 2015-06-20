@@ -64,7 +64,7 @@ func hwinfo() string {
 		log.Println(err)
 	}
 	if len(b1) < 17 || len(b2) < 17 {
-		return "bad len"
+		return "error: parse hw data"
 	}
 	return fmt.Sprintf("arm=%sMhz core=%sMHz", b1[14:17], b2[13:16])
 }
@@ -78,9 +78,8 @@ func cpuTemperature() string {
 	return string(b)
 }
 
-// Just a test.
+// Just for testing, is insecure and slow.
 func k_clk() string {
-	// XXX set perms and read would be better
 	b, err := exec.Command("sudo", "cat", "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq").Output()
 	if err != nil {
 		log.Println(err)
