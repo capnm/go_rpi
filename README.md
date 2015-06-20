@@ -1,7 +1,7 @@
 [wiki](https://github.com/capnm/go_rpi/wiki/)
 [Go](http://golang.org/)
 [RPi](http://www.raspberrypi.org/)
-# Go 2D with the Raspberry Pi.
+# A simple 2D grafik system for the Raspberry Pi.
 
 ### At first install the Go language and the jpeg library.
 (type that line by line in the terminal)
