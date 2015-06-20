@@ -19,7 +19,7 @@ cd /opt/go/src
 # wait a few minutes
 
 # set correct permissions and make the Go language available in the terminal 
-sudo sudo chown -R root:root /opt/go
+sudo chown -R root:root /opt/go
 sudo -i
 cd /usr/bin
 ln -s /opt/go/bin/go
