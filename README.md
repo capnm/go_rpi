@@ -32,7 +32,7 @@ go version
 
 ```
 
-### Install this repository
+### Install and use this repository
 ```
 git clone git://github.com/capnm/go_rpi.git
 
