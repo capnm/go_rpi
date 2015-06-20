@@ -2,16 +2,22 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
+	"os/signal"
 	"time"
 
-	"openvg"
+	g "openvg"
 )
 
 func main() {
-	width, height := openvg.Init()
+	done := make(chan bool, 1)
+	exitHandler(done)
+
+	width, height := g.Init()
 	dim := fmt.Sprintf("w=%d h=%d", width, height)
 
 	w2 := float32(width / 2)
@@ -19,31 +25,39 @@ func main() {
 	w := float32(width)
 
 	for {
-		openvg.Start(width, height)
-		openvg.BackgroundColor("black")
+		select {
+		case <-done:
+			fmt.Println("done")
+			// jump outside the for loop
+			goto end
 
-		openvg.FillRGB(44, 100, 232, 1) // blue 1/2 circle
-		openvg.Circle(w2, 0, w)
-		//openvg.Circle(w2, h2, h2*2)
+		default:
+			g.Start(width, height)
+			g.BackgroundColor("black")
 
-		openvg.FillColor("white")
-		l1, l2, l3 := clock()
-		openvg.TextMid(w2, h2+h2/2, l1, "serif", width/15)
-		openvg.TextMid(w2, h2, l2, "serif", width/7)
-		openvg.TextMid(w2, h2-h2/2+100, l3, "serif", width/15)
-		openvg.TextMid(w2, h2-h2/2-20, dim, "serif", width/30)
+			g.FillRGB(44, 100, 232, 1) // blue 1/2 circle
+			g.Circle(w2, 0, w)
+			//g.Circle(w2, h2, h2*2)
 
-		l4 := hwinfo()
-		openvg.TextMid(w2, h2-h2/2-100, l4, "serif", width/30)
+			g.FillColor("white")
+			l1, l2, l3 := clock()
+			g.TextMid(w2, h2+h2/2, l1, "serif", width/15)
+			g.TextMid(w2, h2, l2, "serif", width/7)
+			g.TextMid(w2, h2-h2/2+100, l3, "serif", width/15)
+			g.TextMid(w2, h2-h2/2-20, dim, "serif", width/30)
 
-		l5 := cpuTemperature()
-		openvg.TextMid(w2, h2-h2/2-180, l5, "serif", width/30)
+			l4 := hwinfo()
+			g.TextMid(w2, h2-h2/2-100, l4, "serif", width/30)
 
-		openvg.End()
-		time.Sleep(1000 * time.Millisecond)
+			l5 := cpuTemperature()
+			g.TextMid(w2, h2-h2/2-180, l5, "serif", width/30)
+
+			g.End()
+			time.Sleep(1000 * time.Millisecond)
+		}
 	}
-	//TODO catch keys or signals
-	openvg.Finish()
+end:
+	g.Finish()
 }
 
 func clock() (string, string, string) {
@@ -76,6 +90,26 @@ func cpuTemperature() string {
 		log.Println(err)
 	}
 	return string(b)
+}
+
+// Wait for the 'ctrl+c' or the 'return' key.
+// Wenn the key is pressed, send a 'true' over the channel 'done'.
+func exitHandler(done chan<- bool) {
+	c := make(chan os.Signal, 1)
+
+	// ctrl+c interrupt
+	signal.Notify(c, os.Interrupt)
+	go func() {
+		for _ = range c {
+			done <- true
+		}
+	}()
+
+	go func() {
+		// Wait for the return key.
+		bufio.NewReader(os.Stdin).ReadByte()
+		done <- true
+	}()
 }
 
 // Just for testing, is insecure and slow.

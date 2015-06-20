@@ -5,25 +5,25 @@ import (
 	"bufio"
 	"os"
 
-	"openvg"
+	g "openvg"
 )
 
 func main() {
-	width, height := openvg.Init()
+	width, height := g.Init()
 
 	w2 := float32(width / 2)
 	w := float32(width)
 
-	openvg.Start(width, height)
-	openvg.BackgroundColor("black")
+	g.Start(width, height)
+	g.BackgroundColor("black")
 
 	// Draw a blue 1/2 circle.
-	openvg.FillRGB(44, 100, 232, 1)
-	openvg.Circle(w2, 0, w)
-	openvg.End()
+	g.FillRGB(44, 100, 232, 1)
+	g.Circle(w2, 0, w)
+	g.End()
 
 	// Wait for the return key.
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 
-	openvg.Finish()
+	g.Finish()
 }
