@@ -54,9 +54,8 @@ Rebuild it with `go install -v clock`
 
 
 # Gotchas
-You get 'error: failed to add service - already in use?' or some other weird EGL error message:
-
-	edit /boot/config.txt and make sure that the minimum video ram size (gpu_mem=64) is 64mb
+You get `error: failed to add service - already in use?` or an another weird `EGL error` message:
+* Edit `/boot/config.txt` and make sure that the video ram size isn't set below 64MB (`gpu_mem=64`).
 
 
 
