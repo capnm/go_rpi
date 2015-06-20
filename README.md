@@ -46,7 +46,7 @@ In the terminal -- or over ssh or in the linux console (ctrl+alt+F1) -- go with 
 
 You can change the source code in the `src/circle` directory and after that you must rebuild the program with `go install -v circle`.
 
-### An exapmle of a continuously updated clock displaying some of the SoC hardware data:
+### An example of a continuously updated clock displaying some of the SoC hardware data:
 Run `bin/clock`.
 Rebuild it with `go install -v clock`
 
