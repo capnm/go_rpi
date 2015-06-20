@@ -1,11 +1,39 @@
 [wiki](https://github.com/capnm/go_rpi/wiki/)
 [Go](http://golang.org/)
 [RPi](http://www.raspberrypi.org/)
-# Let's Go and have some fun with the Raspberry Pi.
+# Go 2D with the Raspberry Pi.
 
-### Install
+### At first install the Go language and the jpeg library.
+(type that line by line in the terminal)
 ```
 sudo apt-get install libjpeg8-dev git
+
+wget https://github.com/golang/go/archive/go1.4.2.tar.gz
+sudo tar xf go1.4.2.tar.gz -C /opt/
+sudo mv /opt/go-go1.4.2 /opt/go
+sudo chown -R $USER /opt/go
+
+# compile Go
+cd /opt/go/src
+./make.bash 
+# wait a few minutes
+
+# set correct permissions and make the Go language available in the terminal 
+sudo sudo chown -R root:root /opt/go
+sudo -i
+cd /usr/bin
+ln -s /opt/go/bin/go
+ln -s /opt/go/bin/gofmt
+exit
+
+# and test Go:
+go version
+--> go version go1.4.2 linux/arm
+
+```
+
+### Install this repository
+```
 git clone git://github.com/capnm/go_rpi.git
 
 cd go_rpi
@@ -14,10 +42,10 @@ export GOPATH=$(pwd)
 
 # Examples
 ### To check if everything works, run the blue circle program:
-Run `bin/circle` in the linux console (ctrl+alt+F1) or the (ssh) terminal.
+Run `bin/circle` in the x11 terminal or remote over ssh or in the linux console (ctrl+alt+F1).
 You can rebuild the binary with `go install -v circle`.
 
-### A simple clock displaying hardware data:
+### A simple clock displaying some hardware data:
 Run `bin/clock`.
 Rebuild it with `go install -v clock`
 
@@ -25,23 +53,11 @@ Rebuild it with `go install -v clock`
 
 
 # Gotchas
-error: failed to add service - already in use?
+'error: failed to add service - already in use?' or some EGL error message:
 
-	edit /boot/config.txt; make sure that the minimum video ram size (gpu_mem) is 64mb
+	edit /boot/config.txt and make sure that the minimum video ram size (gpu_mem=64) is 64mb
 
-# Install the Go language, release 1.3 (~280MB).
-```
-git clone -b release-branch.go1.3 git://github.com/capnm/golang.git --depth 1
-sudo mv golang /opt/
-cd /opt/golang/src
-./make.bash 
 
-sudo -i
-echo 'export PATH=/opt/golang/bin:$PATH' >> /etc/bash.bashrc
-
-reboot
-
-```
 
 # Credits 
 * The original OpenVG code was copied from the [ajstarks openvg](https://github.com/ajstarks/openvg) repository.
