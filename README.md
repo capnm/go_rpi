@@ -41,11 +41,12 @@ export GOPATH=$(pwd)
 ```
 
 # Examples
-### To check if everything works, run the blue circle program:
-Run `bin/circle` in the x11 terminal or remote over ssh or in the linux console (ctrl+alt+F1).
-You can rebuild the binary with `go install -v circle`.
+### To check if everything works, run the blue circle example:
+In the terminal -- or over ssh or in the linux console (ctrl+alt+F1) -- go with `cd` to the `go_rpi` directory, setup the Go environment by typing `export GOPATH=$(pwd)` and run the example by typing `bin/circle`.
 
-### A simple clock displaying some hardware data:
+You can change the source code in the `src/circle` directory and after that you must rebuild the program with `go install -v circle`.
+
+### An exapmle of a continuously updated clock displaying also some of the SoC hardware data:
 Run `bin/clock`.
 Rebuild it with `go install -v clock`
 
@@ -53,7 +54,7 @@ Rebuild it with `go install -v clock`
 
 
 # Gotchas
-'error: failed to add service - already in use?' or some EGL error message:
+You get 'error: failed to add service - already in use?' or some other weird EGL error message:
 
 	edit /boot/config.txt and make sure that the minimum video ram size (gpu_mem=64) is 64mb
 
