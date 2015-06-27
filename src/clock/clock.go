@@ -77,10 +77,9 @@ func hwinfo() string {
 	if err != nil {
 		log.Println(err)
 	}
-	if len(b1) < 17 || len(b2) < 17 {
-		return "error: parse hw data"
-	}
-	return fmt.Sprintf("arm=%sMhz core=%sMHz", b1[14:17], b2[13:16])
+	f_arm := parseFreq(b1)
+	f_core := parseFreq(b2)
+	return fmt.Sprintf("arm=%sMhz core=%sMHz", f_arm, f_core)
 }
 
 // Read the CPU temperature.
@@ -92,7 +91,23 @@ func cpuTemperature() string {
 	return string(b)
 }
 
-// Wait for the 'ctrl+c' or the 'return' key.
+// vcgencmd measure_clock arm/core
+// 	frequency(45)=600_000000
+// 	frequency(1)=250000000
+func parseFreq(b []byte) string {
+	i := 0
+	for ; i < len(b); i++ {
+		if b[i] == '=' {
+			break
+		}
+	}
+	if len(b[i:]) > 7 {
+		return string(b[i+1 : len(b)-7])
+	}
+	return "?"
+}
+
+// Wait for the 'ctrl+c' or the 'enter' key.
 // Wenn the key is pressed, send a 'true' over the channel 'done'.
 func exitHandler(done chan<- bool) {
 	c := make(chan os.Signal, 1)
