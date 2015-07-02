@@ -57,6 +57,7 @@ Rebuild it with `go install -v clock`
 You get `error: failed to add service - already in use?` or an another weird `EGL error` message:
 * Edit the `/boot/config.txt` file. Make sure that the video RAM size isn't set below 64MB (`gpu_mem=64`).
 
+Unfortunately, the OpenVG API seems to be dead end. (OpenVG support in Mesa has been removed.)
 
 
 # Credits 
